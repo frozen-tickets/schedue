@@ -19,67 +19,78 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: #0f172a;
-            color: #ffffff;
+            background: linear-gradient(180deg, #0b1329 0%, #111e38 100%);
+            color: #f1f5f9;
             width: 100%;
             max-width: 393px;
             margin: 0 auto;
-            padding: 10px;
+            padding: 12px 10px;
             min-height: 100vh;
         }
 
         header {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
+            padding: 10px 0 4px 0;
         }
         .main-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #e0f2fe;
-            text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+            font-size: 22px;
+            font-weight: 800;
+            color: #f0f9ff;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.8), 0 0 20px rgba(186, 230, 253, 0.4);
+            letter-spacing: -0.5px;
         }
         .contact-info {
-            font-size: 8px;
-            color: #bfdbfe;
-            margin-top: 4px;
-            margin-bottom: 6px;
-            opacity: 0.8;
+            font-size: 9px;
+            color: #7dd3fc;
+            margin-top: 5px;
+            opacity: 0.85;
+            letter-spacing: 0.3px;
         }
 
         section {
-            background: rgba(30, 41, 59, 0.85);
+            background: rgba(15, 23, 42, 0.65);
             border: 1px solid rgba(56, 189, 248, 0.25);
-            border-radius: 10px;
-            padding: 8px;
-            margin-bottom: 10px;
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         }
         
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 4px;
-            margin-bottom: 6px;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            padding-bottom: 6px;
+            margin-bottom: 8px;
         }
         .section-title {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             color: #38bdf8;
+            letter-spacing: -0.3px;
         }
         .toggle-btn {
             background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            color: #38bdf8;
-            font-size: 9px;
-            padding: 2px 6px;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #7dd3fc;
+            font-size: 9.5px;
+            padding: 2px 7px;
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
+            transition: all 0.2s;
+        }
+        .toggle-btn:hover {
+            background: rgba(56, 189, 248, 0.3);
+            color: #ffffff;
         }
 
         .schedule-wrapper {
             transition: max-height 0.3s ease, opacity 0.3s ease;
-            max-height: 500px;
+            max-height: 800px;
             overflow: hidden;
             opacity: 1;
         }
@@ -89,143 +100,244 @@
         }
         
         .schedule-scroll {
-            max-height: 180px;
+            max-height: 190px;
             overflow-y: auto;
-            border-radius: 6px;
+            overflow-x: auto;
+            border-radius: 8px;
             -webkit-overflow-scrolling: touch;
-            background: #1e293b;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
+
         table.schedule-table {
             width: 100%;
+            min-width: 480px;
             border-collapse: collapse;
             font-size: 9.5px;
             text-align: center;
+            table-layout: fixed;
         }
         table.schedule-table th {
-            background-color: #1e293b !important;
+            background-color: #0f172a !important;
             color: #38bdf8;
             position: sticky;
             top: 0;
-            padding: 5px 2px;
+            padding: 7px 2px;
             z-index: 10;
             font-size: 9.5px;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.35);
+            white-space: nowrap;
+            text-align: center;
         }
         table.schedule-table td {
-            padding: 4px 1px;
+            padding: 6px 2px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             cursor: pointer;
             font-size: 9.5px;
             white-space: nowrap;
+            text-align: center;
+            vertical-align: middle;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         table.schedule-table td:first-child {
             font-weight: bold;
             color: #e0f2fe;
         }
         table.schedule-table tr:hover td {
-            background: rgba(56, 189, 248, 0.2);
+            background: rgba(56, 189, 248, 0.18);
         }
+
+        table.schedule-table col.col-date { width: 55px; }
+        table.schedule-table col.col-time { width: 42px; }
+        table.schedule-table col.col-role { width: calc((100% - 97px) / 6); }
 
         table.schedule-table th:nth-child(2),
         table.schedule-table td:nth-child(2) {
-            border-right: 1px solid rgba(56, 189, 248, 0.4);
-            padding-right: 4px;
+            border-right: 1px solid rgba(56, 189, 248, 0.3);
         }
-        table.schedule-table th:nth-child(3),
-        table.schedule-table td:nth-child(3) {
-            padding-left: 4px;
+
+        .cast-changed-tag {
+            background: #f59e0b;
+            color: #000;
+            font-size: 7px;
+            font-weight: bold;
+            padding: 1px 2px;
+            border-radius: 3px;
+            margin-left: 2px;
+            display: inline-block;
+            vertical-align: middle;
+            box-shadow: 0 0 4px rgba(245, 158, 11, 0.5);
+            line-height: 1;
         }
 
         .actor-filter-container {
-            margin-top: 8px;
-            padding-top: 6px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.12);
         }
-        .actor-filter-title {
-            font-size: 9px;
-            color: #cbd5e1;
-            margin-bottom: 4px;
-            font-weight: bold;
+        .filter-top-bar {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .actor-filter-title {
+            font-size: 9.5px;
+            color: #bae6fd;
+            font-weight: bold;
+        }
+        .reset-filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #94a3b8;
+            font-size: 8px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .reset-filter-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 수정된 스케줄 필터 스타일 */
+        .role-filter-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+            gap: 3px;
+        }
+        .role-label {
+            font-size: 8.5px;
+            font-weight: bold;
+            color: #38bdf8;
+            width: 52px;
+            padding: 2px 0;
+            flex-shrink: 0;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 4px;
+            text-align: center;
+            white-space: nowrap;
         }
         .actor-filter-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 3px;
+            flex: 1;
         }
         .actor-btn {
-            background: #1e293b;
+            background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(56, 189, 248, 0.3);
             color: #cbd5e1;
             font-size: 8.5px;
-            padding: 2px 6px;
-            border-radius: 12px;
+            padding: 2px 5px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s;
+            white-space: nowrap;
         }
         .actor-btn:hover, .actor-btn.active {
             background: #0284c7;
             color: #ffffff;
             border-color: #38bdf8;
             font-weight: bold;
+            box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
         }
 
         .form-group {
-            margin-bottom: 6px;
+            margin-bottom: 7px;
             display: flex;
             align-items: center;
+            flex-wrap: nowrap;
         }
         .form-group label {
             font-size: 10px;
             color: #cbd5e1;
             width: 70px;
             flex-shrink: 0;
+            white-space: nowrap;
         }
         .form-group input, .form-group select {
             flex: 1;
-            padding: 5px 6px;
-            border-radius: 4px;
-            border: 1px solid #334155;
-            background: #0f172a;
+            padding: 5px 7px;
+            border-radius: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: #0b1329;
             color: #ffffff;
             font-size: 10px;
             outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #38bdf8;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 10px;
+            color: #cbd5e1;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-reset {
+            background: #334155;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 9px;
+            padding: 5px 8px;
+            border-radius: 5px;
+            margin-left: 4px;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+        .btn-reset:hover {
+            background: #475569;
         }
         .btn-primary {
             width: 100%;
-            padding: 8px;
+            padding: 9px;
             background: linear-gradient(135deg, #0284c7, #0369a1);
-            border: none;
-            border-radius: 5px;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 6px;
             color: white;
             font-weight: 700;
             font-size: 11px;
             cursor: pointer;
-            margin-top: 4px;
+            margin-top: 5px;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0369a1, #075985);
         }
 
         .summary-info {
-            background: #1e293b;
-            padding: 6px 10px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 7px 12px;
             border-radius: 6px;
-            margin-bottom: 6px;
+            margin-bottom: 7px;
             font-size: 10px;
             display: flex;
             justify-content: space-between;
         }
-        .summary-info strong { color: #38bdf8; }
+        .summary-info strong { color: #38bdf8; font-size: 11px; }
         .record-list {
             list-style: none;
-            max-height: 120px;
+            max-height: 130px;
             overflow-y: auto;
         }
         .record-card {
-            background: #1e293b;
+            background: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 6px 8px;
-            border-radius: 4px;
-            margin-bottom: 4px;
+            padding: 7px 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
             font-size: 10px;
             position: relative;
         }
@@ -233,48 +345,58 @@
             display: flex;
             justify-content: space-between;
             font-weight: bold;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
         .delete-btn {
             position: absolute;
-            right: 6px;
-            bottom: 4px;
+            right: 8px;
+            bottom: 5px;
             background: none;
             border: none;
-            color: #ef4444;
-            font-size: 9px;
+            color: #f87171;
+            font-size: 9.5px;
             cursor: pointer;
+            font-weight: bold;
+        }
+        .delete-btn:hover {
+            color: #ef4444;
         }
 
         .site-links {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 4px;
-            font-size: 9px;
-            margin-bottom: 6px;
+            gap: 5px;
+            font-size: 9.5px;
+            margin-bottom: 8px;
         }
         .site-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: #cbd5e1;
+            color: #e0f2fe;
             text-decoration: none;
-            padding: 4px 6px;
-            background: #1e293b;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 4px;
+            padding: 5px 7px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 6px;
             font-weight: bold;
+            transition: all 0.2s;
+        }
+        .site-item:hover {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
         }
 
         .grade-legend {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
             font-size: 8.5px;
-            margin-bottom: 6px;
-            background: #1e293b;
-            padding: 6px;
-            border-radius: 4px;
+            margin-bottom: 8px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 7px;
+            border-radius: 6px;
         }
         .legend-row {
             display: flex;
@@ -286,10 +408,10 @@
         .g-item { display: flex; align-items: center; gap: 4px; }
         .g-dot { width: 8px; height: 8px; border-radius: 50%; }
 
-        .c-vip { background-color: #a37549; color: #fff; }
-        .c-r { background-color: #be2e2e; color: #fff; }
-        .c-s { background-color: #3867b3; color: #fff; }
-        .c-a { background-color: #4b8f46; color: #fff; }
+        .c-vip { background-color: #d97706; color: #fff; }
+        .c-r { background-color: #dc2626; color: #fff; }
+        .c-s { background-color: #2563eb; color: #fff; }
+        .c-a { background-color: #16a34a; color: #fff; }
         .c-disabled { background-color: #64748b; color: #fff; }
         .c-unassigned { background-color: #475569; color: #94a3b8; }
 
@@ -299,38 +421,46 @@
 
         .stage-box {
             text-align: center;
-            background: rgba(226, 232, 240, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-            font-size: 9px;
-            padding: 3px;
-            border-radius: 4px;
-            margin: 0 auto 6px auto;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(14, 165, 233, 0.15));
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #f0f9ff;
+            font-size: 9.5px;
+            padding: 4px;
+            border-radius: 6px;
+            margin: 0 auto 8px auto;
             width: 65%;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-weight: bold;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
         }
 
-        /* 1F, 2F 중앙 정렬 수정 부분 */
+        .floor-label-row {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            width: 100%;
+            margin: 6px 0 2px 0;
+        }
+        .floor-label-space {
+            display: flex;
+            gap: 1px;
+        }
         .floor-label {
             font-size: 10px;
-            color: #e0f2fe;
+            color: #38bdf8;
             font-weight: 800;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             text-align: center;
-            margin: 6px 0 2px 0;
-            width: 100%;
+            line-height: 1;
+            white-space: nowrap;
         }
-        
+
         .seat-scroll-container {
             width: 100%;
             overflow-x: auto;
-            background: rgba(15, 23, 42, 0.9);
-            border-radius: 6px;
+            background: rgba(11, 19, 41, 0.9);
+            border-radius: 8px;
             padding: 8px 4px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
             -webkit-overflow-scrolling: touch;
         }
         
@@ -379,7 +509,7 @@
             font-weight: bold;
             flex-shrink: 0;
             box-shadow: 0 0.5px 1px rgba(0,0,0,0.5);
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.1s;
         }
 
         .seat-cell.empty-space {
@@ -392,11 +522,59 @@
         .seat-cell:not(.empty-space):hover {
             transform: scale(2.2);
             z-index: 99;
-            box-shadow: 0 0 4px #ffffff;
+            box-shadow: 0 0 5px #ffffff;
         }
 
         .gap-222 {
             margin-right: 4px;
+        }
+
+        .actor-board-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            gap: 6px;
+        }
+        .actor-board-group:last-child {
+            margin-bottom: 0;
+        }
+        .actor-board-label {
+            font-size: 9px;
+            font-weight: bold;
+            color: #38bdf8;
+            min-width: 55px;
+            padding: 3px 6px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 4px;
+            text-align: center;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .actor-board-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            flex: 1;
+        }
+        .actor-board-badge {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-size: 9.5px;
+            color: #cbd5e1;
+            transition: all 0.2s;
+        }
+        .actor-board-badge.watched {
+            background: rgba(2, 132, 199, 0.25);
+            border-color: #38bdf8;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .actor-board-badge .count-highlight {
+            color: #38bdf8;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -409,12 +587,22 @@
 
     <section>
         <div class="section-header">
-            <div class="section-title">1. 스케줄</div>
+            <div class="section-title">☃️ 스케줄</div>
             <button class="toggle-btn" id="toggleScheduleBtn" onclick="toggleSchedule()">접기 ▲</button>
         </div>
         <div class="schedule-wrapper" id="scheduleWrapper">
             <div class="schedule-scroll">
                 <table class="schedule-table">
+                    <colgroup>
+                        <col class="col-date">
+                        <col class="col-time">
+                        <col class="col-role">
+                        <col class="col-role">
+                        <col class="col-role">
+                        <col class="col-role">
+                        <col class="col-role">
+                        <col class="col-role">
+                    </colgroup>
                     <thead>
                         <tr>
                             <th>일자</th>
@@ -430,19 +618,20 @@
                     <tbody id="scheduleBody"></tbody>
                 </table>
             </div>
+            
             <div class="actor-filter-container">
-                <div class="actor-filter-title">
-                    <span>🔍 배우별 스케줄 보기</span>
-                    <span style="font-weight:normal; font-size:8px; color:#94a3b8;">(최대 2명 선택 가능)</span>
+                <div class="filter-top-bar">
+                    <span class="actor-filter-title">🔍 배우 스케줄 필터</span>
+                    <button class="reset-filter-btn" onclick="resetActorFilters()">필터 초기화</button>
                 </div>
-                <div class="actor-filter-buttons" id="actorFilterButtons"></div>
+                <div id="roleFilterContainer"></div>
             </div>
         </div>
     </section>
 
     <section>
         <div class="section-header" style="border:none; margin:0; padding:0;">
-            <div class="section-title" style="margin-bottom:6px;">2. 관람 정보 입력</div>
+            <div class="section-title" style="margin-bottom:6px;">🎟️ 관람 정보 입력</div>
         </div>
         <div class="form-group">
             <label>관람 일시</label>
@@ -465,6 +654,7 @@
             <label>할인 권종</label>
             <select id="discountType" onchange="updatePrice()">
                 <option value="0" data-count="1">정가</option>
+                <option value="0" data-count="1">타임세일</option>
                 <option value="0.05" data-count="3">3인 패키지 (5%)</option>
                 <option value="0.10" data-count="4">4인 패키지 (10%)</option>
                 <option value="0.30" data-count="1">국가유공자 (본인만 30%)</option>
@@ -472,15 +662,22 @@
             </select>
         </div>
         <div class="form-group">
+            <label>수수료 설정</label>
+            <label class="checkbox-label">
+                <input type="checkbox" id="includeFee" checked onchange="updatePrice()"> 예매 수수료 포함 (장당 2,000원)
+            </label>
+        </div>
+        <div class="form-group">
             <label>최종 결제액</label>
-            <input type="text" id="finalPriceDisplay" readonly style="color:#38bdf8; font-weight:bold;">
+            <input type="number" id="finalPriceInput" placeholder="직접 수정 가능" style="color:#38bdf8; font-weight:bold;">
+            <button type="button" class="btn-reset" onclick="resetPrice()">복원</button>
         </div>
         <button class="btn-primary" onclick="addRecord()">티켓 저장</button>
     </section>
 
     <section>
         <div class="section-header" style="border:none; margin:0; padding:0;">
-            <div class="section-title" style="margin-bottom:6px;">3. 관극 정산 기록</div>
+            <div class="section-title" style="margin-bottom:6px;">❄️ 관극 정산 기록</div>
         </div>
         <div class="summary-info">
             <div>관극 횟수: <strong id="totalCount">0</strong>회</div>
@@ -491,7 +688,7 @@
 
     <section>
         <div class="section-header" style="border:none; margin:0; padding:0;">
-            <div class="section-title" style="margin-bottom:6px;">4. 예매처 및 등급별 좌석배치도</div>
+            <div class="section-title" style="margin-bottom:6px;">👑 예매처 및 등급별 좌석배치도</div>
         </div>
         
         <div class="site-links">
@@ -527,12 +724,16 @@
         <div class="stage-box">STAGE</div>
         
         <div class="seat-scroll-container">
-            <div class="floor-label">1F</div>
             <div class="seat-grid-table" id="seatMap1F"></div>
-
-            <div class="floor-label" style="margin-top:10px;">2F</div>
-            <div class="seat-grid-table" id="seatMap2F"></div>
+            <div class="seat-grid-table" id="seatMap2F" style="margin-top:10px;"></div>
         </div>
+    </section>
+
+    <section>
+        <div class="section-header" style="border:none; margin:0; padding:0;">
+            <div class="section-title" style="margin-bottom:8px;">🎭 배우별 정산판</div>
+        </div>
+        <div id="actorBoardContainer"></div>
     </section>
 
     <script>
@@ -566,9 +767,9 @@
             { date: "2026-08-30", time: "15:00", elsa: "민경아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "정열" },
             { date: "2026-09-01", time: "19:30", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
             { date: "2026-09-02", time: "19:30", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "정열" },
-            { date: "2026-09-03", time: "19:30", elsa: "정유지", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
+            { date: "2026-09-03", time: "19:30", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "임진웅", elsaChanged: true },
             { date: "2026-09-04", time: "14:30", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "이창호", weselton: "정열" },
-            { date: "2026-09-04", time: "19:30", elsa: "정유지", anna: "최지혜", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "정열" },
+            { date: "2026-09-04", time: "19:30", elsa: "정선아", anna: "최지혜", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "정열", elsaChanged: true },
             { date: "2026-09-05", time: "14:00", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
             { date: "2026-09-05", time: "19:00", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
             { date: "2026-09-06", time: "15:00", elsa: "민경아", anna: "최지혜", kris: "차윤해", hans: "김원빈", olaf: "이창호", weselton: "정열" },
@@ -648,25 +849,34 @@
             { date: "2026-11-08", time: "15:00", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "임진웅" }
         ];
 
-        const orderedActorList = [
-            "정선아", "정유지", "민경아", 
-            "박진주", "홍금비", "최지혜", 
-            "차윤해", "신재범", 
-            "김원빈", "황건하", 
-            "정원영", "한규정", "이창호", 
-            "정열", "임진웅"
+        const roleCastMap = [
+            { role: "엘사", key: "elsa", actors: ["정선아", "정유지", "민경아"] },
+            { role: "안나", key: "anna", actors: ["박진주", "홍금비", "최지혜"] },
+            { role: "크리스토프", key: "kris", actors: ["차윤해", "신재범"] },
+            { role: "한스", key: "hans", actors: ["김원빈", "황건하"] },
+            { role: "올라프", key: "olaf", actors: ["정원영", "한규정", "이창호"] },
+            { role: "위즐튼", key: "weselton", actors: ["정열", "임진웅"] }
         ];
 
-        let selectedActors = [];
+        let selectedRoleActors = {
+            elsa: [],
+            anna: [],
+            kris: [],
+            hans: [],
+            olaf: [],
+            weselton: []
+        };
+
         let myRecords = JSON.parse(localStorage.getItem('frozenCalcRecords')) || [];
         let seatWatchStatus = JSON.parse(localStorage.getItem('frozenSeatWatchStatus')) || {};
 
         window.onload = function() {
-            initActorFilters();
+            initRoleFilters();
             renderSchedule();
             updatePrice();
             renderRecords();
             buildGradeSeatMap();
+            renderActorBoard();
 
             document.addEventListener('contextmenu', e => e.preventDefault());
         };
@@ -683,47 +893,59 @@
             }
         }
 
-        function initActorFilters() {
-            const actors = ["전체", ...orderedActorList];
-            const container = document.getElementById('actorFilterButtons');
+        function initRoleFilters() {
+            const container = document.getElementById('roleFilterContainer');
             container.innerHTML = '';
 
-            actors.forEach(actor => {
-                const btn = document.createElement('button');
-                btn.className = `actor-btn ${actor === '전체' ? 'active' : ''}`;
-                btn.innerText = actor;
-                btn.onclick = () => toggleActorFilter(actor);
-                container.appendChild(btn);
+            roleCastMap.forEach(r => {
+                const group = document.createElement('div');
+                group.className = 'role-filter-group';
+
+                const label = document.createElement('div');
+                label.className = 'role-label';
+                label.innerText = r.role;
+                group.appendChild(label);
+
+                const btnGroup = document.createElement('div');
+                btnGroup.className = 'actor-filter-buttons';
+
+                r.actors.forEach(actor => {
+                    const btn = document.createElement('button');
+                    btn.className = 'actor-btn';
+                    btn.innerText = actor;
+                    btn.setAttribute('data-role', r.key);
+                    btn.setAttribute('data-actor', actor);
+                    btn.onclick = () => toggleRoleActorFilter(r.key, actor, btn);
+                    btnGroup.appendChild(btn);
+                });
+
+                group.appendChild(btnGroup);
+                container.appendChild(group);
             });
         }
 
-        function toggleActorFilter(actor) {
-            if (actor === "전체") {
-                selectedActors = [];
+        function toggleRoleActorFilter(roleKey, actor, btnElem) {
+            const list = selectedRoleActors[roleKey];
+            const idx = list.indexOf(actor);
+
+            if (idx > -1) {
+                list.splice(idx, 1);
+                btnElem.classList.remove('active');
             } else {
-                const idx = selectedActors.indexOf(actor);
-                if (idx > -1) {
-                    selectedActors.splice(idx, 1);
-                } else {
-                    if (selectedActors.length >= 2) {
-                        alert("배우는 최대 2명까지 지정 선택이 가능합니다.");
-                        return;
-                    }
-                    selectedActors.push(actor);
-                }
+                list.push(actor);
+                btnElem.classList.add('active');
             }
 
-            document.querySelectorAll('.actor-btn').forEach(btn => {
-                const bText = btn.innerText;
-                if (selectedActors.length === 0) {
-                    if (bText === "전체") btn.classList.add('active');
-                    else btn.classList.remove('active');
-                } else {
-                    if (selectedActors.includes(bText)) btn.classList.add('active');
-                    else btn.classList.remove('active');
-                }
-            });
+            renderSchedule();
+        }
 
+        function resetActorFilters() {
+            roleCastMap.forEach(r => {
+                selectedRoleActors[r.key] = [];
+            });
+            document.querySelectorAll('.actor-filter-buttons .actor-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
             renderSchedule();
         }
 
@@ -732,25 +954,33 @@
             tbody.innerHTML = '';
 
             const filteredSchedule = fullSchedule.filter(item => {
-                if (selectedActors.length === 0) return true;
-                const cast = [item.elsa, item.anna, item.kris, item.hans, item.olaf, item.weselton];
-                return selectedActors.every(actor => cast.includes(actor));
+                for (let r of roleCastMap) {
+                    const selected = selectedRoleActors[r.key];
+                    if (selected.length > 0 && !selected.includes(item[r.key])) {
+                        return false;
+                    }
+                }
+                return true;
             });
 
             filteredSchedule.forEach(item => {
                 const dateObj = new Date(item.date);
                 const dayName = days[dateObj.getDay()];
 
+                const elsaDisplay = item.elsaChanged 
+                    ? `${item.elsa}<span class="cast-changed-tag" title="캐스팅 변경됨">변경</span>`
+                    : item.elsa;
+
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${item.date.slice(5)}(${dayName})</td>
                     <td>${item.time}</td>
-                    <td style="${selectedActors.includes(item.elsa) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.elsa}</td>
-                    <td style="${selectedActors.includes(item.anna) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.anna}</td>
-                    <td style="${selectedActors.includes(item.kris) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.kris}</td>
-                    <td style="${selectedActors.includes(item.hans) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.hans}</td>
-                    <td style="${selectedActors.includes(item.olaf) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.olaf}</td>
-                    <td style="${selectedActors.includes(item.weselton) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.weselton}</td>
+                    <td style="${selectedRoleActors.elsa.includes(item.elsa) ? 'color:#38bdf8; font-weight:bold;' : ''}">${elsaDisplay}</td>
+                    <td style="${selectedRoleActors.anna.includes(item.anna) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.anna}</td>
+                    <td style="${selectedRoleActors.kris.includes(item.kris) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.kris}</td>
+                    <td style="${selectedRoleActors.hans.includes(item.hans) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.hans}</td>
+                    <td style="${selectedRoleActors.olaf.includes(item.olaf) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.olaf}</td>
+                    <td style="${selectedRoleActors.weselton.includes(item.weselton) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.weselton}</td>
                 `;
                 tr.onclick = () => {
                     document.getElementById('watchDate').value = `${item.date}(${dayName}) ${item.time}`;
@@ -759,26 +989,37 @@
             });
         }
 
-        function updatePrice() {
-            const gradePrice = parseInt(document.getElementById('seatGrade').value);
+        function calculateAutoPrice() {
+            const gradePrice = parseInt(document.getElementById('seatGrade').value) || 0;
             const discountSelect = document.getElementById('discountType');
-            const discountRate = parseFloat(discountSelect.value);
+            const discountRate = parseFloat(discountSelect.value) || 0;
             const ticketCount = parseInt(discountSelect.options[discountSelect.selectedIndex].getAttribute('data-count') || '1');
-            const feePerTicket = 2000;
+            const includeFee = document.getElementById('includeFee').checked;
+            const feePerTicket = includeFee ? 2000 : 0;
 
             const baseTotal = gradePrice * ticketCount;
-            const calculated = Math.floor(baseTotal * (1 - discountRate)) + (feePerTicket * ticketCount);
-            
-            document.getElementById('finalPriceDisplay').value = `${calculated.toLocaleString()}원 (수수료 포함)`;
+            return Math.floor(baseTotal * (1 - discountRate)) + (feePerTicket * ticketCount);
+        }
+
+        function updatePrice() {
+            const calculated = calculateAutoPrice();
+            document.getElementById('finalPriceInput').value = calculated;
             return calculated;
+        }
+
+        function resetPrice() {
+            updatePrice();
         }
 
         function addRecord() {
             const dateVal = document.getElementById('watchDate').value;
             const seatVal = document.getElementById('selectSeat').value;
-            const priceVal = updatePrice();
+            const priceVal = parseInt(document.getElementById('finalPriceInput').value) || 0;
 
-            if (!dateVal || !seatVal) return;
+            if (!dateVal || !seatVal) {
+                alert('관람 일시와 좌석을 선택해 주세요.');
+                return;
+            }
 
             const record = {
                 id: Date.now(),
@@ -797,6 +1038,7 @@
 
             renderRecords();
             buildGradeSeatMap();
+            renderActorBoard();
             document.getElementById('selectSeat').value = '';
         }
 
@@ -839,6 +1081,78 @@
             localStorage.setItem('frozenCalcRecords', JSON.stringify(myRecords));
             renderRecords();
             buildGradeSeatMap();
+            renderActorBoard();
+        }
+
+        function renderActorBoard() {
+            const container = document.getElementById('actorBoardContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const totalCastCount = {};
+            roleCastMap.forEach(r => {
+                r.actors.forEach(actor => {
+                    totalCastCount[actor] = 0;
+                });
+            });
+
+            fullSchedule.forEach(s => {
+                roleCastMap.forEach(r => {
+                    const actorName = s[r.key];
+                    if (totalCastCount[actorName] !== undefined) {
+                        totalCastCount[actorName]++;
+                    }
+                });
+            });
+
+            const myWatchedCount = {};
+            roleCastMap.forEach(r => {
+                r.actors.forEach(actor => {
+                    myWatchedCount[actor] = 0;
+                });
+            });
+
+            myRecords.forEach(rec => {
+                const datePart = rec.datetime.split(' ')[0];
+                const timePart = rec.datetime.split(' ')[1];
+                const pureDate = datePart.split('(')[0];
+
+                const foundCast = fullSchedule.find(s => s.date === pureDate && s.time === timePart);
+                if (foundCast) {
+                    roleCastMap.forEach(r => {
+                        const actorName = foundCast[r.key];
+                        if (myWatchedCount[actorName] !== undefined) {
+                            myWatchedCount[actorName]++;
+                        }
+                    });
+                }
+            });
+
+            roleCastMap.forEach(r => {
+                const group = document.createElement('div');
+                group.className = 'actor-board-group';
+
+                const label = document.createElement('div');
+                label.className = 'actor-board-label';
+                label.innerText = r.role;
+                group.appendChild(label);
+
+                const list = document.createElement('div');
+                list.className = 'actor-board-list';
+
+                r.actors.forEach(actor => {
+                    const watched = myWatchedCount[actor] || 0;
+                    const total = totalCastCount[actor] || 0;
+
+                    const badge = document.createElement('div');
+                    badge.className = `actor-board-badge ${watched > 0 ? 'watched' : ''}`;
+                    badge.innerHTML = `${actor} (<span class="count-highlight">${watched}</span>/${total})`;
+                    list.appendChild(badge);
+                });
+
+                group.appendChild(list);
+                container.appendChild(group);
+            });
         }
 
         function createRange(start, end, excludes = []) {
@@ -941,8 +1255,8 @@
                 };
             });
 
-            renderFloorRows(map1F, data1F, '1층');
-            renderFloorRows(document.getElementById('seatMap2F'), data2F, '2층');
+            renderFloorRows(map1F, data1F, '1층', '1F');
+            renderFloorRows(document.getElementById('seatMap2F'), data2F, '2층', '2F');
         }
 
         function getGradeFromImage(floor, row, num) {
@@ -1001,8 +1315,58 @@
             return { cls: 'c-vip', label: 'VIP석' };
         }
 
-        function renderFloorRows(targetElem, floorData, floorTitle) {
+        function createFloorLabelRow(floorText) {
+            const rowWrapper = document.createElement('div');
+            rowWrapper.className = 'floor-label-row';
+
+            const dummyNum = document.createElement('div');
+            dummyNum.className = 'row-num';
+            rowWrapper.appendChild(dummyNum);
+
+            const secA = document.createElement('div');
+            secA.className = 'floor-label-space';
+            secA.style.width = '109.2px';
+            rowWrapper.appendChild(secA);
+
+            const aisle1 = document.createElement('div');
+            aisle1.className = 'aisle-space';
+            rowWrapper.appendChild(aisle1);
+
+            const secB = document.createElement('div');
+            secB.className = 'floor-label-space';
+            secB.style.alignItems = 'center';
+
+            const bLeft = document.createElement('div');
+            bLeft.style.width = '62.4px';
+            secB.appendChild(bLeft);
+
+            const labelCell = document.createElement('div');
+            labelCell.className = 'floor-label';
+            labelCell.innerText = floorText;
+            secB.appendChild(labelCell);
+
+            const bRight = document.createElement('div');
+            bRight.style.width = '62.4px';
+            secB.appendChild(bRight);
+
+            rowWrapper.appendChild(secB);
+
+            const aisle2 = document.createElement('div');
+            aisle2.className = 'aisle-space';
+            rowWrapper.appendChild(aisle2);
+
+            const secC = document.createElement('div');
+            secC.className = 'floor-label-space';
+            secC.style.width = '109.2px';
+            rowWrapper.appendChild(secC);
+
+            return rowWrapper;
+        }
+
+        function renderFloorRows(targetElem, floorData, floorTitle, floorLabelText) {
             targetElem.innerHTML = '';
+
+            targetElem.appendChild(createFloorLabelRow(floorLabelText));
 
             floorData.forEach(rData => {
                 const rowWrapper = document.createElement('div');
