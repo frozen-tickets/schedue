@@ -205,16 +205,15 @@
         .role-filter-group {
             display: flex;
             align-items: center;
-            margin-bottom: 4px;
-            gap: 4px;
+            margin-bottom: 3px;
+            gap: 3px;
         }
         .role-label {
             font-size: 8.5px;
             font-weight: bold;
             color: #38bdf8;
-            width: auto;
-            min-width: 52px;
-            padding: 2px 5px;
+            width: 52px;
+            padding: 2px 0;
             flex-shrink: 0;
             background: rgba(56, 189, 248, 0.12);
             border: 1px solid rgba(56, 189, 248, 0.2);
@@ -233,8 +232,8 @@
             border: 1px solid rgba(56, 189, 248, 0.3);
             color: #cbd5e1;
             font-size: 8.5px;
-            padding: 2px 7px;
-            border-radius: 12px;
+            padding: 2px 5px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s;
             white-space: nowrap;
@@ -529,7 +528,6 @@
             margin-right: 4px;
         }
 
-        /* 배우별 정산판 스타일 추가 */
         .actor-board-group {
             display: flex;
             align-items: flex-start;
@@ -555,13 +553,13 @@
         .actor-board-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 3px;
             flex: 1;
         }
         .actor-board-badge {
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 3px 7px;
+            padding: 3px 6px;
             border-radius: 6px;
             font-size: 9.5px;
             color: #cbd5e1;
@@ -730,7 +728,6 @@
         </div>
     </section>
 
-    <!-- 배우별 정산판 신규 섹션 -->
     <section>
         <div class="section-header" style="border:none; margin:0; padding:0;">
             <div class="section-title" style="margin-bottom:8px;">🎭 배우별 정산판</div>
@@ -848,7 +845,43 @@
             { date: "2026-11-06", time: "19:30", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "정열" },
             { date: "2026-11-07", time: "14:00", elsa: "민경아", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
             { date: "2026-11-07", time: "19:00", elsa: "정선아", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
-            { date: "2026-11-08", time: "15:00", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "임진웅" }
+            { date: "2026-11-08", time: "15:00", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
+            
+            /* 신규 추가 캐스팅 스케줄 (11/10 ~ 12/06) */
+            { date: "2026-11-10", time: "19:30", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "황건하", olaf: "한규정", weselton: "정열" },
+            { date: "2026-11-11", time: "19:30", elsa: "정선아", anna: "최지혜", kris: "차윤해", hans: "김원빈", olaf: "정원영", weselton: "정열" },
+            { date: "2026-11-12", time: "19:30", elsa: "민경아", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "임진웅" },
+            { date: "2026-11-13", time: "14:30", elsa: "정선아", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
+            { date: "2026-11-13", time: "19:30", elsa: "정유지", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
+            { date: "2026-11-14", time: "14:00", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "정열" },
+            { date: "2026-11-14", time: "19:00", elsa: "정선아", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "정열" },
+            { date: "2026-11-15", time: "15:00", elsa: "정유지", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
+            { date: "2026-11-17", time: "19:30", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "정열" },
+            { date: "2026-11-18", time: "14:30", elsa: "정선아", anna: "최지혜", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "임진웅" },
+            { date: "2026-11-18", time: "19:30", elsa: "민경아", anna: "홍금비", kris: "차윤해", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
+            { date: "2026-11-19", time: "19:30", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
+            { date: "2026-11-20", time: "14:30", elsa: "정유지", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "정열" },
+            { date: "2026-11-20", time: "19:30", elsa: "민경아", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "정열" },
+            { date: "2026-11-21", time: "14:00", elsa: "정유지", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
+            { date: "2026-11-21", time: "19:00", elsa: "민경아", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
+            { date: "2026-11-22", time: "15:00", elsa: "정선아", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "정열" },
+            { date: "2026-11-24", time: "19:30", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "정원영", weselton: "임진웅" },
+            { date: "2026-11-25", time: "19:30", elsa: "민경아", anna: "최지혜", kris: "신재범", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
+            { date: "2026-11-26", time: "19:30", elsa: "정유지", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "정열" },
+            { date: "2026-11-27", time: "14:30", elsa: "민경아", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "정열" },
+            { date: "2026-11-27", time: "19:30", elsa: "정유지", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "정열" },
+            { date: "2026-11-28", time: "14:00", elsa: "정선아", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
+            { date: "2026-11-28", time: "19:00", elsa: "민경아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
+            { date: "2026-11-29", time: "15:00", elsa: "정유지", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "정열" },
+            { date: "2026-12-01", time: "19:30", elsa: "정선아", anna: "최지혜", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "정열" },
+            { date: "2026-12-02", time: "14:30", elsa: "민경아", anna: "홍금비", kris: "차윤해", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
+            { date: "2026-12-02", time: "19:30", elsa: "정유지", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "임진웅" },
+            { date: "2026-12-03", time: "19:30", elsa: "정선아", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "한규정", weselton: "정열" },
+            { date: "2026-12-04", time: "14:30", elsa: "민경아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "정열" },
+            { date: "2026-12-04", time: "19:30", elsa: "정유지", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "정열" },
+            { date: "2026-12-05", time: "14:00", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "임진웅" },
+            { date: "2026-12-05", time: "19:00", elsa: "정유지", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
+            { date: "2026-12-06", time: "15:00", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "정열" }
         ];
 
         const roleCastMap = [
@@ -1086,13 +1119,11 @@
             renderActorBoard();
         }
 
-        // 배우별 정산판 렌더링 함수
         function renderActorBoard() {
             const container = document.getElementById('actorBoardContainer');
             if (!container) return;
             container.innerHTML = '';
 
-            // 1. 전체 스케줄에서 각 배우별 총 출연 회차 집계
             const totalCastCount = {};
             roleCastMap.forEach(r => {
                 r.actors.forEach(actor => {
@@ -1109,7 +1140,6 @@
                 });
             });
 
-            // 2. 저장된 내 관람 기록(myRecords)에서 관람 일시를 파싱하여 배우별 본 횟수 집계
             const myWatchedCount = {};
             roleCastMap.forEach(r => {
                 r.actors.forEach(actor => {
@@ -1118,8 +1148,8 @@
             });
 
             myRecords.forEach(rec => {
-                const datePart = rec.datetime.split(' ')[0]; // 예: "2026-08-09(일)"
-                const timePart = rec.datetime.split(' ')[1]; // 예: "19:00"
+                const datePart = rec.datetime.split(' ')[0];
+                const timePart = rec.datetime.split(' ')[1];
                 const pureDate = datePart.split('(')[0];
 
                 const foundCast = fullSchedule.find(s => s.date === pureDate && s.time === timePart);
@@ -1133,7 +1163,6 @@
                 }
             });
 
-            // 3. 정산판 UI 생성
             roleCastMap.forEach(r => {
                 const group = document.createElement('div');
                 group.className = 'actor-board-group';
