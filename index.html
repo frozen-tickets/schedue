@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>뮤지컬 겨울왕국 정산판</title>
+    <!-- 화면 캡처용 html2canvas 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * {
             -webkit-user-select: none;
@@ -17,75 +19,87 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #0f172a;
-            background: linear-gradient(180deg, #0b1329 0%, #111e38 100%);
-            color: #f1f5f9;
+            font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif;
+            background: #f0f7ff;
+            background: linear-gradient(180deg, #e0f2fe 0%, #f4f9ff 100%);
+            color: #334155;
             width: 100%;
             max-width: 393px;
             margin: 0 auto;
-            padding: 12px 10px;
+            padding: 16px 12px;
             min-height: 100vh;
         }
 
+        /* 상단 헤더 영역 */
         header {
             text-align: center;
-            margin-bottom: 16px;
+            margin: 20px 0 36px 0;
             padding: 10px 0 4px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .main-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #f0f9ff;
-            text-shadow: 0 0 12px rgba(56, 189, 248, 0.8), 0 0 20px rgba(186, 230, 253, 0.4);
+        
+        .header-sub-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: #0284c7;
+            letter-spacing: 2px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .main-header-title {
+            font-size: 26px;
+            font-weight: 900;
+            color: #0284c7;
             letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            line-height: 1.1;
         }
+
         .contact-info {
-            font-size: 9px;
-            color: #7dd3fc;
-            margin-top: 5px;
-            opacity: 0.85;
-            letter-spacing: 0.3px;
+            font-size: 9.5px;
+            color: #64748b;
+            font-weight: 500;
+            text-align: center;
         }
 
         section {
-            background: rgba(15, 23, 42, 0.65);
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            backdrop-filter: blur(8px);
-            border-radius: 12px;
-            padding: 10px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 20px rgba(186, 230, 253, 0.25);
+            border: 1px solid rgba(224, 242, 254, 0.8);
         }
         
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
-            padding-bottom: 6px;
-            margin-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
         }
         .section-title {
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 700;
-            color: #38bdf8;
-            letter-spacing: -0.3px;
+            color: #0284c7;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .toggle-btn {
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: #7dd3fc;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            color: #0284c7;
             font-size: 9.5px;
-            padding: 2px 7px;
-            border-radius: 4px;
+            padding: 3px 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
-        }
-        .toggle-btn:hover {
-            background: rgba(56, 189, 248, 0.3);
-            color: #ffffff;
+            font-weight: 600;
         }
 
         .schedule-wrapper {
@@ -100,13 +114,12 @@
         }
         
         .schedule-scroll {
-            max-height: 190px;
+            max-height: 200px;
             overflow-y: auto;
             overflow-x: auto;
-            border-radius: 8px;
-            -webkit-overflow-scrolling: touch;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            background: #fafafa;
         }
 
         table.schedule-table {
@@ -118,63 +131,53 @@
             table-layout: fixed;
         }
         table.schedule-table th {
-            background-color: #0f172a !important;
-            color: #38bdf8;
+            background-color: #f1f5f9 !important;
+            color: #475569;
             position: sticky;
             top: 0;
-            padding: 7px 2px;
+            padding: 8px 2px;
             z-index: 10;
             font-size: 9.5px;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.35);
-            white-space: nowrap;
-            text-align: center;
+            font-weight: 700;
+            border-bottom: 1px solid #e2e8f0;
         }
         table.schedule-table td {
-            padding: 6px 2px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 7px 2px;
+            border-bottom: 1px solid #f1f5f9;
             cursor: pointer;
             font-size: 9.5px;
-            white-space: nowrap;
-            text-align: center;
+            color: #334155;
             vertical-align: middle;
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         table.schedule-table td:first-child {
-            font-weight: bold;
-            color: #e0f2fe;
+            font-weight: 700;
+            color: #0284c7;
         }
         table.schedule-table tr:hover td {
-            background: rgba(56, 189, 248, 0.18);
+            background: #e0f2fe;
         }
 
         table.schedule-table col.col-date { width: 55px; }
-        table.schedule-table col.col-time { width: 42px; }
-        table.schedule-table col.col-role { width: calc((100% - 97px) / 6); }
-
-        table.schedule-table th:nth-child(2),
-        table.schedule-table td:nth-child(2) {
-            border-right: 1px solid rgba(56, 189, 248, 0.3);
-        }
+        table.schedule-table col.col-time { width: 38px; }
+        table.schedule-table col.col-role { width: calc((100% - 93px) / 6); }
 
         .cast-changed-tag {
-            background: #f59e0b;
-            color: #000;
-            font-size: 7px;
+            background: #fef3c7;
+            color: #d97706;
+            font-size: 6.5px;
             font-weight: bold;
-            padding: 1px 2px;
+            padding: 1px 3px;
             border-radius: 3px;
             margin-left: 2px;
-            display: inline-block;
-            vertical-align: middle;
-            box-shadow: 0 0 4px rgba(245, 158, 11, 0.5);
-            line-height: 1;
         }
 
         .actor-filter-container {
             margin-top: 10px;
             padding-top: 8px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.12);
+            border-top: 1px dashed #e2e8f0;
         }
         .filter-top-bar {
             display: flex;
@@ -184,42 +187,35 @@
         }
         .actor-filter-title {
             font-size: 9.5px;
-            color: #bae6fd;
-            font-weight: bold;
+            color: #64748b;
+            font-weight: 700;
         }
         .reset-filter-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #94a3b8;
+            background: #f1f5f9;
+            border: none;
+            color: #64748b;
             font-size: 8px;
             padding: 2px 6px;
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        .reset-filter-btn:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.2);
         }
 
         .role-filter-group {
             display: flex;
             align-items: center;
-            margin-bottom: 3px;
-            gap: 3px;
+            margin-bottom: 4px;
+            gap: 4px;
         }
         .role-label {
             font-size: 8.5px;
-            font-weight: bold;
-            color: #38bdf8;
+            font-weight: 700;
+            color: #0284c7;
             width: 52px;
-            padding: 2px 0;
+            padding: 3px 0;
             flex-shrink: 0;
-            background: rgba(56, 189, 248, 0.12);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 4px;
+            background: #f0f9ff;
+            border-radius: 6px;
             text-align: center;
-            white-space: nowrap;
         }
         .actor-filter-buttons {
             display: flex;
@@ -228,174 +224,210 @@
             flex: 1;
         }
         .actor-btn {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            color: #cbd5e1;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
             font-size: 8.5px;
-            padding: 2px 5px;
-            border-radius: 10px;
+            padding: 2px 7px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s;
-            white-space: nowrap;
         }
-        .actor-btn:hover, .actor-btn.active {
+        .actor-btn.active {
             background: #0284c7;
             color: #ffffff;
-            border-color: #38bdf8;
-            font-weight: bold;
-            box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+            border-color: #0284c7;
+            font-weight: 600;
+        }
+
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .event-card {
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .event-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .event-date {
+            font-size: 8.5px;
+            color: #64748b;
+        }
+        .event-badge {
+            font-size: 8px;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 6px;
+            background: #e0f2fe;
+            color: #0284c7;
         }
 
         .form-group {
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            flex-wrap: nowrap;
         }
         .form-group label {
-            font-size: 10px;
-            color: #cbd5e1;
+            font-size: 9.5px;
+            color: #475569;
+            font-weight: 600;
             width: 70px;
             flex-shrink: 0;
-            white-space: nowrap;
         }
         .form-group input, .form-group select {
             flex: 1;
-            padding: 5px 7px;
-            border-radius: 6px;
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            background: #0b1329;
-            color: #ffffff;
+            padding: 6px 8px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #0f172a;
             font-size: 10px;
             outline: none;
-            transition: border-color 0.2s;
         }
-        .form-group input:focus, .form-group select:focus {
-            border-color: #38bdf8;
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            white-space: nowrap;
         }
         .checkbox-label {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 10px;
-            color: #cbd5e1;
+            gap: 4px;
+            font-size: 9.5px;
+            color: #475569;
             cursor: pointer;
             white-space: nowrap;
         }
         .btn-reset {
-            background: #334155;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #94a3b8;
+            border: none;
             color: #ffffff;
-            font-size: 9px;
-            padding: 5px 8px;
-            border-radius: 5px;
+            font-size: 8.5px;
+            padding: 6px 8px;
+            border-radius: 6px;
             margin-left: 4px;
             cursor: pointer;
-            flex-shrink: 0;
-            transition: background 0.2s;
-        }
-        .btn-reset:hover {
-            background: #475569;
         }
         .btn-primary {
             width: 100%;
-            padding: 9px;
-            background: linear-gradient(135deg, #0284c7, #0369a1);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            border-radius: 6px;
+            padding: 10px;
+            background: #0284c7;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 700;
+            font-size: 11.5px;
+            cursor: pointer;
+            margin-top: 4px;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
+        }
+
+        .btn-capture-blue {
+            width: 100%;
+            padding: 10px;
+            background: #1e3a8a;
+            border: none;
+            border-radius: 8px;
             color: white;
             font-weight: 700;
             font-size: 11px;
             cursor: pointer;
-            margin-top: 5px;
-            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
-            transition: all 0.2s;
+            margin-top: 8px;
+            box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background 0.2s;
         }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #0369a1, #075985);
+        .btn-capture-blue:active {
+            background: #172554;
         }
 
         .summary-info {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 7px 12px;
-            border-radius: 6px;
-            margin-bottom: 7px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
             font-size: 10px;
             display: flex;
             justify-content: space-between;
         }
-        .summary-info strong { color: #38bdf8; font-size: 11px; }
+        .summary-info strong { color: #0284c7; font-size: 11px; }
         .record-list {
             list-style: none;
             max-height: 130px;
             overflow-y: auto;
         }
         .record-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 7px 10px;
-            border-radius: 6px;
-            margin-bottom: 5px;
-            font-size: 10px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 9.5px;
             position: relative;
         }
         .record-header {
             display: flex;
             justify-content: space-between;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 3px;
         }
         .delete-btn {
             position: absolute;
             right: 8px;
-            bottom: 5px;
+            bottom: 6px;
             background: none;
             border: none;
-            color: #f87171;
-            font-size: 9.5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .delete-btn:hover {
             color: #ef4444;
+            font-size: 9px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
         .site-links {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 5px;
+            gap: 6px;
             font-size: 9.5px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .site-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: #e0f2fe;
+            color: #0369a1;
             text-decoration: none;
-            padding: 5px 7px;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            border-radius: 6px;
-            font-weight: bold;
-            transition: all 0.2s;
-        }
-        .site-item:hover {
-            border-color: #38bdf8;
-            background: rgba(56, 189, 248, 0.15);
+            padding: 6px 8px;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            font-weight: 600;
         }
 
         .grade-legend {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            font-size: 8.5px;
+            gap: 4px;
+            font-size: 8px;
             margin-bottom: 8px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 7px;
-            border-radius: 6px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 6px;
+            border-radius: 8px;
         }
         .legend-row {
             display: flex;
@@ -404,65 +436,77 @@
             gap: 8px;
             flex-wrap: wrap;
         }
-        .g-item { display: flex; align-items: center; gap: 4px; }
-        .g-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .g-item { display: flex; align-items: center; gap: 3px; }
+        .g-dot { width: 7px; height: 7px; border-radius: 50%; }
 
-        .c-vip { background-color: #d97706; color: #fff; }
-        .c-r { background-color: #dc2626; color: #fff; }
-        .c-s { background-color: #2563eb; color: #fff; }
-        .c-a { background-color: #16a34a; color: #fff; }
-        .c-disabled { background-color: #64748b; color: #fff; }
-        .c-unassigned { background-color: #475569; color: #94a3b8; }
+        .c-vip { background-color: #38bdf8; color: #fff; }
+        .c-r { background-color: #f472b6; color: #fff; }
+        .c-s { background-color: #d97706; color: #fff; }
+        .c-a { background-color: #1e3a8a; color: #fff; }
+        .c-disabled { background-color: #94a3b8; color: #fff; }
+        .c-unassigned { background-color: #e2e8f0; color: #fff; }
 
-        .c-watch-1 { background-color: #ec4899 !important; color: #fff !important; }
-        .c-watch-2 { background-color: #a855f7 !important; color: #fff !important; }
-        .c-watch-3 { background-color: #f97316 !important; color: #fff !important; }
+        .c-watch-1 { background-color: #f43f5e !important; color: #fff !important; }
+        .c-watch-2 { background-color: #9333ea !important; color: #fff !important; }
+        .c-watch-3 { background-color: #ea580c !important; color: #fff !important; }
 
+        /* STAGE 폰트: MUSICAL과 같은 영문 자간 및 서체 변경 */
         .stage-box {
             text-align: center;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(14, 165, 233, 0.15));
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: #f0f9ff;
-            font-size: 9.5px;
+            background: #e0f2fe;
+            border: 1px solid #bae6fd;
+            color: #0284c7;
+            font-size: 10px;
             padding: 4px;
             border-radius: 6px;
             margin: 0 auto 8px auto;
             width: 65%;
-            letter-spacing: 3px;
-            font-weight: bold;
-            box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
-        .floor-label-row {
+        .zoom-controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .zoom-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            font-weight: bold;
+            font-size: 11px;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 2px;
-            width: 100%;
-            margin: 6px 0 2px 0;
-        }
-        .floor-label-space {
-            display: flex;
-            gap: 1px;
-        }
-        .floor-label {
-            font-size: 10px;
-            color: #38bdf8;
-            font-weight: 800;
-            text-align: center;
-            line-height: 1;
-            white-space: nowrap;
+            justify-content: center;
         }
 
         .seat-scroll-container {
             width: 100%;
             overflow-x: auto;
-            background: rgba(11, 19, 41, 0.9);
-            border-radius: 8px;
-            padding: 8px 4px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 10px 4px;
+            border: 1px solid #e2e8f0;
             -webkit-overflow-scrolling: touch;
         }
         
+        .seat-zoom-wrapper {
+            transform-origin: top center;
+            transition: transform 0.1s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100%;
+        }
+
         .seat-grid-table {
             display: flex;
             flex-direction: column;
@@ -470,13 +514,7 @@
             align-items: center;
             min-width: 360px;
         }
-
-        .seat-row-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-
+        .seat-row-wrapper { display: flex; align-items: center; gap: 2px; }
         .row-num {
             font-size: 6.5px;
             color: #94a3b8;
@@ -485,17 +523,8 @@
             font-weight: bold;
             flex-shrink: 0;
         }
-
-        .seat-section-block {
-            display: flex;
-            gap: 1px;
-        }
-
-        .aisle-space {
-            width: 6px;
-            flex-shrink: 0;
-        }
-
+        .seat-section-block { display: flex; gap: 1px; }
+        .aisle-space { width: 6px; flex-shrink: 0; }
         .seat-cell {
             width: 6.8px;
             height: 7.5px;
@@ -507,81 +536,129 @@
             font-size: 4px;
             font-weight: bold;
             flex-shrink: 0;
-            box-shadow: 0 0.5px 1px rgba(0,0,0,0.5);
-            transition: background-color 0.2s, transform 0.1s;
+            transition: transform 0.1s;
         }
-
         .seat-cell.empty-space {
             background: transparent !important;
-            box-shadow: none !important;
             cursor: default;
             pointer-events: none;
         }
-
         .seat-cell:not(.empty-space):hover {
             transform: scale(2.2);
             z-index: 99;
-            box-shadow: 0 0 5px #ffffff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        .gap-222 { margin-right: 4px; }
+
+        /* 좌석 캡처 전용 영역 (수평 정중앙 정렬 보장) */
+        #pureSeatCaptureArea {
+            background: #ffffff;
+            padding: 14px 12px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
-        .gap-222 {
-            margin-right: 4px;
+        /* 배우별 정산판 스타일 & Total 뱃지 정렬 */
+        #pureActorBoardCaptureArea {
+            background: #ffffff;
+            padding: 10px 4px;
+            border-radius: 12px;
         }
-
-        .actor-board-group {
+        .casting-board-container {
             display: flex;
-            align-items: flex-start;
-            margin-bottom: 6px;
-            gap: 6px;
+            flex-direction: column;
+            gap: 16px;
+            padding: 4px 0;
+            background: #ffffff;
         }
-        .actor-board-group:last-child {
-            margin-bottom: 0;
+        .casting-role-group { text-align: center; }
+        .casting-role-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: #0284c7;
+            margin-bottom: 10px;
+            display: inline-block;
         }
-        .actor-board-label {
-            font-size: 9px;
-            font-weight: bold;
-            color: #38bdf8;
-            min-width: 55px;
-            padding: 3px 6px;
-            background: rgba(56, 189, 248, 0.12);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 4px;
-            text-align: center;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .actor-board-list {
+        .casting-grid {
             display: flex;
+            justify-content: center;
             flex-wrap: wrap;
-            gap: 3px;
-            flex: 1;
+            gap: 12px 10px;
         }
-        .actor-board-badge {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 3px 6px;
-            border-radius: 6px;
-            font-size: 9.5px;
-            color: #cbd5e1;
-            transition: all 0.2s;
+        .actor-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 72px;
+            text-align: center;
         }
-        .actor-board-badge.watched {
-            background: rgba(2, 132, 199, 0.25);
-            border-color: #38bdf8;
+        .actor-img-wrapper {
+            width: 64px;
+            height: 85px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #bae6fd;
+            background: #f1f5f9;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+        }
+        .actor-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.15);
+        }
+        .actor-name {
+            font-size: 10px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 3px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .actor-count-badge {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            color: #0284c7;
+            font-size: 8px;
+            font-weight: 600;
+            height: 16px;
+            padding: 0 6px;
+            border-radius: 10px;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 16px;
+            box-sizing: border-box;
+            margin-top: 1px;
+        }
+        .actor-count-badge.has-count {
+            background: #0284c7;
             color: #ffffff;
-            font-weight: bold;
-        }
-        .actor-board-badge .count-highlight {
-            color: #38bdf8;
-            font-weight: bold;
+            border-color: #0284c7;
         }
     </style>
 </head>
 <body>
 
+    <!-- 상단 헤더 -->
     <header>
-        <div class="main-title">뮤지컬 겨울왕국</div>
-        <div class="contact-info">문의 시 @zxxinxa 로 연락주세요.</div>
+        <div class="header-sub-title">MUSICAL</div>
+        <h1 class="main-header-title">&lt;겨울왕국&gt;</h1>
+        <div class="contact-info">문의 시 @zxxinxa 로 연락주세요</div>
     </header>
 
     <section>
@@ -628,6 +705,43 @@
         </div>
     </section>
 
+    <!-- 이벤트 탭 섹션 -->
+    <section>
+        <div class="section-header" style="border:none; margin:0; padding:0;">
+            <div class="section-title" style="margin-bottom:8px;">🎁 이벤트 일정</div>
+        </div>
+        <div class="event-list">
+            <div class="event-card">
+                <div>
+                    <div class="event-title">프리뷰 공연</div>
+                    <div class="event-date">2026.08.09(일) ~ 2026.08.12(수)</div>
+                </div>
+                <span class="event-badge">PREVIEW</span>
+            </div>
+            <div class="event-card">
+                <div>
+                    <div class="event-title">아이스 부채 증정</div>
+                    <div class="event-date">2026.08.17(월) ~ 2026.08.21(금)</div>
+                </div>
+                <span class="event-badge">GIFT DAY</span>
+            </div>
+            <div class="event-card">
+                <div>
+                    <div class="event-title">예사데이</div>
+                    <div class="event-date">2026.08.22(토) ~ 2026.08.23(일)</div>
+                </div>
+                <span class="event-badge">YES24 DAY</span>
+            </div>
+            <div class="event-card">
+                <div>
+                    <div class="event-title">커튼콜 데이</div>
+                    <div class="event-date">2026.10.20(화) ~ 2026.10.25(일)</div>
+                </div>
+                <span class="event-badge">CURTAIN CALL</span>
+            </div>
+        </div>
+    </section>
+
     <section>
         <div class="section-header" style="border:none; margin:0; padding:0;">
             <div class="section-title" style="margin-bottom:6px;">🎟️ 관람 정보 입력</div>
@@ -662,13 +776,15 @@
         </div>
         <div class="form-group">
             <label>수수료 설정</label>
-            <label class="checkbox-label">
-                <input type="checkbox" id="includeFee" checked onchange="updatePrice()"> 예매 수수료 포함 (장당 2,000원)
-            </label>
+            <div class="checkbox-container">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="includeFee" checked onchange="updatePrice()"> 예매 수수료 포함 (장당 2,000원)
+                </label>
+            </div>
         </div>
         <div class="form-group">
             <label>최종 결제액</label>
-            <input type="number" id="finalPriceInput" placeholder="직접 수정 가능" style="color:#38bdf8; font-weight:bold;">
+            <input type="number" id="finalPriceInput" style="color:#0284c7; font-weight:bold;">
             <button type="button" class="btn-reset" onclick="resetPrice()">복원</button>
         </div>
         <button class="btn-primary" onclick="addRecord()">티켓 저장</button>
@@ -685,23 +801,21 @@
         <div class="record-list" id="recordContainer"></div>
     </section>
 
+    <!-- 좌석 배치도 섹션 -->
     <section>
         <div class="section-header" style="border:none; margin:0; padding:0;">
-            <div class="section-title" style="margin-bottom:6px;">👑 예매처 및 등급별 좌석배치도</div>
+            <div class="section-title" style="margin-bottom:6px;">👑 예매처 및 좌석배치도</div>
         </div>
         
         <div class="site-links">
             <a href="https://www.charlottetheater.co.kr/m/performence/current.asp" target="_blank" class="site-item">
-                <span>샤롯데</span>
-                <span>↗</span>
+                <span>샤롯데</span><span>↗</span>
             </a>
             <a href="https://mobileticket.interpark.com/goods/26007416?app_tapbar_state=hide" target="_blank" class="site-item">
-                <span>NOL티켓</span>
-                <span>↗</span>
+                <span>NOL티켓</span><span>↗</span>
             </a>
             <a href="https://m.ticket.yes24.com/Perf/58563" target="_blank" class="site-item">
-                <span>예스24</span>
-                <span>↗</span>
+                <span>예스24</span><span>↗</span>
             </a>
         </div>
 
@@ -713,30 +827,68 @@
                 <div class="g-item"><div class="g-dot c-a"></div><span>A</span></div>
                 <div class="g-item"><div class="g-dot c-disabled"></div><span>휠체어/미판매</span></div>
             </div>
-            <div class="legend-row" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 4px; margin-top: 2px;">
+            <div class="legend-row" style="border-top: 1px solid #e2e8f0; padding-top: 3px; margin-top: 2px;">
                 <div class="g-item"><div class="g-dot c-watch-1"></div><span>1회 관람</span></div>
                 <div class="g-item"><div class="g-dot c-watch-2"></div><span>2회 관람</span></div>
                 <div class="g-item"><div class="g-dot c-watch-3"></div><span>3회+ 관람</span></div>
             </div>
         </div>
 
-        <div class="stage-box">STAGE</div>
-        
-        <div class="seat-scroll-container">
-            <div class="seat-grid-table" id="seatMap1F"></div>
-            <div class="seat-grid-table" id="seatMap2F" style="margin-top:10px;"></div>
+        <div class="zoom-controls">
+            <button class="zoom-btn" onclick="adjustZoom(-0.25)">-</button>
+            <span id="zoomLevelText" style="font-size:9.5px; color:#64748b; font-weight:bold;">100%</span>
+            <button class="zoom-btn" onclick="adjustZoom(0.25)">+</button>
+            <button class="zoom-btn" style="width: auto; padding: 0 5px;" onclick="resetZoom()">초기화</button>
         </div>
+
+        <!-- STAGE + 좌석배치도 -->
+        <div id="pureSeatCaptureArea">
+            <div class="stage-box">STAGE</div>
+            <div class="seat-scroll-container" style="border:none; padding:0; background:transparent;">
+                <div class="seat-zoom-wrapper" id="seatZoomWrapper">
+                    <div class="seat-grid-table" id="seatMap1F"></div>
+                    <div class="seat-grid-table" id="seatMap2F" style="margin-top:10px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 좌석배치도 개별 저장 버튼 -->
+        <button class="btn-capture-blue" onclick="downloadSeatMapImage()">📸 좌석배치도 저장</button>
     </section>
 
+    <!-- 배우별 정산판 섹션 -->
     <section>
         <div class="section-header" style="border:none; margin:0; padding:0;">
-            <div class="section-title" style="margin-bottom:8px;">🎭 배우별 정산판</div>
+            <div class="section-title" style="margin-bottom:12px;">🎭 배우별 정산판</div>
         </div>
-        <div id="actorBoardContainer"></div>
+        
+        <!-- [캡처 전용 영역] 배우별 정산판 -->
+        <div id="pureActorBoardCaptureArea">
+            <div id="actorBoardContainer" class="casting-board-container"></div>
+        </div>
+
+        <!-- 배우별 정산판 개별 저장 버튼 -->
+        <button class="btn-capture-blue" onclick="downloadActorBoardImage()">📸 정산판 저장</button>
     </section>
 
     <script>
         const days = ['일', '월', '화', '수', '목', '금', '토'];
+
+        const actorImages = {
+            "정선아": "KakaoTalk_20261022_181011339.jpg",
+            "정유지": "KakaoTalk_20261022_181011339_01.jpg",
+            "민경아": "KakaoTalk_20261022_181011339_02.jpg",
+            "박진주": "KakaoTalk_20261022_181011339_03.jpg",
+            "홍금비": "KakaoTalk_20261022_181011339_04.jpg",
+            "최지혜": "KakaoTalk_20261022_181011339_05.jpg",
+            "차윤해": "KakaoTalk_20261022_181011339_06.jpg",
+            "신재범": "KakaoTalk_20261022_181011339_07.jpg",
+            "김원빈": "KakaoTalk_20261022_181011339_08.jpg",
+            "황건하": "KakaoTalk_20261022_181011339_09.jpg",
+            "정원영": "KakaoTalk_20261022_181011339_10.jpg",
+            "한규정": "KakaoTalk_20261022_181011339_11.jpg",
+            "이창호": "KakaoTalk_20261022_181011339_12.jpg"
+        };
 
         const fullSchedule = [
             { date: "2026-08-09", time: "19:00", elsa: "민경아", anna: "홍금비", kris: "차윤해", hans: "김원빈", olaf: "정원영", weselton: "정열" },
@@ -808,7 +960,7 @@
             { date: "2026-10-07", time: "19:30", elsa: "정유지", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "정열" },
             { date: "2026-10-08", time: "19:30", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "정열" },
             { date: "2026-10-09", time: "14:00", elsa: "정유지", anna: "최지혜", kris: "신재범", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
-            { date: "2026-10-09", time: "19:00", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
+            { date: "2026-10-09", time: "19:00", elsa: "정유지", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "임진웅", elsaChanged: true },
             { date: "2026-10-10", time: "14:00", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "이창호", weselton: "정열" },
             { date: "2026-10-10", time: "19:00", elsa: "민경아", anna: "홍금비", kris: "차윤해", hans: "김원빈", olaf: "정원영", weselton: "정열" },
             { date: "2026-10-11", time: "15:00", elsa: "정유지", anna: "최지혜", kris: "신재범", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
@@ -836,52 +988,11 @@
             { date: "2026-10-30", time: "19:30", elsa: "정유지", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "정열" },
             { date: "2026-10-31", time: "14:00", elsa: "정선아", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
             { date: "2026-10-31", time: "19:00", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "임진웅" },
-            { date: "2026-11-01", time: "15:00", elsa: "정유지", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-11-03", time: "19:30", elsa: "정선아", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-11-04", time: "14:30", elsa: "민경아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "정열" },
-            { date: "2026-11-04", time: "19:30", elsa: "정유지", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "정열" },
-            { date: "2026-11-05", time: "19:30", elsa: "정선아", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-11-06", time: "14:30", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "정열" },
-            { date: "2026-11-06", time: "19:30", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "정열" },
-            { date: "2026-11-07", time: "14:00", elsa: "민경아", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
-            { date: "2026-11-07", time: "19:00", elsa: "정선아", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
-            { date: "2026-11-08", time: "15:00", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
-            
-            /* 신규 추가 캐스팅 스케줄 (11/10 ~ 12/06) */
-            { date: "2026-11-10", time: "19:30", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "황건하", olaf: "한규정", weselton: "정열" },
-            { date: "2026-11-11", time: "19:30", elsa: "정선아", anna: "최지혜", kris: "차윤해", hans: "김원빈", olaf: "정원영", weselton: "정열" },
-            { date: "2026-11-12", time: "19:30", elsa: "민경아", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "임진웅" },
-            { date: "2026-11-13", time: "14:30", elsa: "정선아", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-11-13", time: "19:30", elsa: "정유지", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
-            { date: "2026-11-14", time: "14:00", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "정열" },
-            { date: "2026-11-14", time: "19:00", elsa: "정선아", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "정열" },
-            { date: "2026-11-15", time: "15:00", elsa: "정유지", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-11-17", time: "19:30", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "정열" },
-            { date: "2026-11-18", time: "14:30", elsa: "정선아", anna: "최지혜", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-11-18", time: "19:30", elsa: "민경아", anna: "홍금비", kris: "차윤해", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
-            { date: "2026-11-19", time: "19:30", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
-            { date: "2026-11-20", time: "14:30", elsa: "정유지", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "정열" },
-            { date: "2026-11-20", time: "19:30", elsa: "민경아", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "정열" },
-            { date: "2026-11-21", time: "14:00", elsa: "정유지", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "임진웅" },
-            { date: "2026-11-21", time: "19:00", elsa: "민경아", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-11-22", time: "15:00", elsa: "정선아", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "정열" },
-            { date: "2026-11-24", time: "19:30", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "정원영", weselton: "임진웅" },
-            { date: "2026-11-25", time: "19:30", elsa: "민경아", anna: "최지혜", kris: "신재범", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
-            { date: "2026-11-26", time: "19:30", elsa: "정유지", anna: "홍금비", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "정열" },
-            { date: "2026-11-27", time: "14:30", elsa: "민경아", anna: "박진주", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "정열" },
-            { date: "2026-11-27", time: "19:30", elsa: "정유지", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "정열" },
-            { date: "2026-11-28", time: "14:00", elsa: "정선아", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "임진웅" },
-            { date: "2026-11-28", time: "19:00", elsa: "민경아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-11-29", time: "15:00", elsa: "정유지", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "정원영", weselton: "정열" },
-            { date: "2026-12-01", time: "19:30", elsa: "정선아", anna: "최지혜", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "정열" },
-            { date: "2026-12-02", time: "14:30", elsa: "민경아", anna: "홍금비", kris: "차윤해", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
-            { date: "2026-12-02", time: "19:30", elsa: "정유지", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-12-03", time: "19:30", elsa: "정선아", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "한규정", weselton: "정열" },
-            { date: "2026-12-04", time: "14:30", elsa: "민경아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "이창호", weselton: "정열" },
-            { date: "2026-12-04", time: "19:30", elsa: "정유지", anna: "최지혜", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "정열" },
-            { date: "2026-12-05", time: "14:00", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "김원빈", olaf: "한규정", weselton: "임진웅" },
-            { date: "2026-12-05", time: "19:00", elsa: "정유지", anna: "최지혜", kris: "신재범", hans: "김원빈", olaf: "이창호", weselton: "임진웅" },
-            { date: "2026-12-06", time: "15:00", elsa: "정선아", anna: "박진주", kris: "차윤해", hans: "황건하", olaf: "정원영", weselton: "정열" }
+            { date: "2027-01-01", time: "14:00", elsa: "민경아", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "정원영", weselton: "정열" },
+            { date: "2027-01-01", time: "19:00", elsa: "정유지", anna: "박진주", kris: "신재범", hans: "황건하", olaf: "이창호", weselton: "정열" },
+            { date: "2027-01-02", time: "14:00", elsa: "민경아", anna: "최지혜", kris: "차윤해", hans: "김원빈", olaf: "한규정", weselton: "임진웅" },
+            { date: "2027-01-02", time: "19:00", elsa: "정유지", anna: "박진주", kris: "차윤해", hans: "김원빈", olaf: "정원영", weselton: "임진웅" },
+            { date: "2027-01-03", time: "15:00", elsa: "정선아", anna: "홍금비", kris: "신재범", hans: "황건하", olaf: "이창호", weselton: "정열" }
         ];
 
         const roleCastMap = [
@@ -889,21 +1000,13 @@
             { role: "안나", key: "anna", actors: ["박진주", "홍금비", "최지혜"] },
             { role: "크리스토프", key: "kris", actors: ["차윤해", "신재범"] },
             { role: "한스", key: "hans", actors: ["김원빈", "황건하"] },
-            { role: "올라프", key: "olaf", actors: ["정원영", "한규정", "이창호"] },
-            { role: "위즐튼", key: "weselton", actors: ["정열", "임진웅"] }
+            { role: "올라프", key: "olaf", actors: ["정원영", "한규정", "이창호"] }
         ];
 
-        let selectedRoleActors = {
-            elsa: [],
-            anna: [],
-            kris: [],
-            hans: [],
-            olaf: [],
-            weselton: []
-        };
-
+        let selectedRoleActors = { elsa: [], anna: [], kris: [], hans: [], olaf: [] };
         let myRecords = JSON.parse(localStorage.getItem('frozenCalcRecords')) || [];
         let seatWatchStatus = JSON.parse(localStorage.getItem('frozenSeatWatchStatus')) || {};
+        let currentZoomLevel = 1.0;
 
         window.onload = function() {
             initRoleFilters();
@@ -912,7 +1015,6 @@
             renderRecords();
             buildGradeSeatMap();
             renderActorBoard();
-
             document.addEventListener('contextmenu', e => e.preventDefault());
         };
 
@@ -925,6 +1027,27 @@
             } else {
                 wrapper.classList.add('collapsed');
                 btn.innerText = '펼치기 ▼';
+            }
+        }
+
+        function adjustZoom(delta) {
+            currentZoomLevel = Math.max(0.75, Math.min(2.0, currentZoomLevel + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoomLevel = 1.0;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            const wrapper = document.getElementById('seatZoomWrapper');
+            if (wrapper) {
+                wrapper.style.transform = `scale(${currentZoomLevel})`;
+            }
+            const txt = document.getElementById('zoomLevelText');
+            if (txt) {
+                txt.innerText = `${Math.round(currentZoomLevel * 100)}%`;
             }
         }
 
@@ -948,8 +1071,6 @@
                     const btn = document.createElement('button');
                     btn.className = 'actor-btn';
                     btn.innerText = actor;
-                    btn.setAttribute('data-role', r.key);
-                    btn.setAttribute('data-actor', actor);
                     btn.onclick = () => toggleRoleActorFilter(r.key, actor, btn);
                     btnGroup.appendChild(btn);
                 });
@@ -970,14 +1091,11 @@
                 list.push(actor);
                 btnElem.classList.add('active');
             }
-
             renderSchedule();
         }
 
         function resetActorFilters() {
-            roleCastMap.forEach(r => {
-                selectedRoleActors[r.key] = [];
-            });
+            roleCastMap.forEach(r => { selectedRoleActors[r.key] = []; });
             document.querySelectorAll('.actor-filter-buttons .actor-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
@@ -1003,19 +1121,19 @@
                 const dayName = days[dateObj.getDay()];
 
                 const elsaDisplay = item.elsaChanged 
-                    ? `${item.elsa}<span class="cast-changed-tag" title="캐스팅 변경됨">변경</span>`
+                    ? `${item.elsa}<span class="cast-changed-tag">변경</span>`
                     : item.elsa;
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${item.date.slice(5)}(${dayName})</td>
                     <td>${item.time}</td>
-                    <td style="${selectedRoleActors.elsa.includes(item.elsa) ? 'color:#38bdf8; font-weight:bold;' : ''}">${elsaDisplay}</td>
-                    <td style="${selectedRoleActors.anna.includes(item.anna) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.anna}</td>
-                    <td style="${selectedRoleActors.kris.includes(item.kris) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.kris}</td>
-                    <td style="${selectedRoleActors.hans.includes(item.hans) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.hans}</td>
-                    <td style="${selectedRoleActors.olaf.includes(item.olaf) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.olaf}</td>
-                    <td style="${selectedRoleActors.weselton.includes(item.weselton) ? 'color:#38bdf8; font-weight:bold;' : ''}">${item.weselton}</td>
+                    <td style="${selectedRoleActors.elsa.includes(item.elsa) ? 'color:#0284c7; font-weight:bold;' : ''}">${elsaDisplay}</td>
+                    <td style="${selectedRoleActors.anna.includes(item.anna) ? 'color:#0284c7; font-weight:bold;' : ''}">${item.anna}</td>
+                    <td style="${selectedRoleActors.kris.includes(item.kris) ? 'color:#0284c7; font-weight:bold;' : ''}">${item.kris}</td>
+                    <td style="${selectedRoleActors.hans.includes(item.hans) ? 'color:#0284c7; font-weight:bold;' : ''}">${item.hans}</td>
+                    <td style="${selectedRoleActors.olaf.includes(item.olaf) ? 'color:#0284c7; font-weight:bold;' : ''}">${item.olaf}</td>
+                    <td>${item.weselton}</td>
                 `;
                 tr.onclick = () => {
                     document.getElementById('watchDate').value = `${item.date}(${dayName}) ${item.time}`;
@@ -1042,9 +1160,7 @@
             return calculated;
         }
 
-        function resetPrice() {
-            updatePrice();
-        }
+        function resetPrice() { updatePrice(); }
 
         function addRecord() {
             const dateVal = document.getElementById('watchDate').value;
@@ -1056,13 +1172,7 @@
                 return;
             }
 
-            const record = {
-                id: Date.now(),
-                datetime: dateVal,
-                seat: seatVal,
-                price: priceVal
-            };
-
+            const record = { id: Date.now(), datetime: dateVal, seat: seatVal, price: priceVal };
             myRecords.push(record);
             localStorage.setItem('frozenCalcRecords', JSON.stringify(myRecords));
             
@@ -1084,13 +1194,12 @@
             let total = 0;
             myRecords.forEach((item) => {
                 total += item.price;
-
                 const card = document.createElement('div');
                 card.className = 'record-card';
                 card.innerHTML = `
                     <div class="record-header">
                         <span>${item.datetime}</span>
-                        <span class="record-price" style="color:#38bdf8;">${item.price.toLocaleString()}원</span>
+                        <span style="color:#0284c7;">${item.price.toLocaleString()}원</span>
                     </div>
                     <div>좌석: ${item.seat}</div>
                     <button class="delete-btn" onclick="deleteRecord(${item.id})">삭제</button>
@@ -1125,25 +1234,19 @@
             container.innerHTML = '';
 
             const totalCastCount = {};
+            const myWatchedCount = {};
+
             roleCastMap.forEach(r => {
                 r.actors.forEach(actor => {
                     totalCastCount[actor] = 0;
+                    myWatchedCount[actor] = 0;
                 });
             });
 
             fullSchedule.forEach(s => {
                 roleCastMap.forEach(r => {
                     const actorName = s[r.key];
-                    if (totalCastCount[actorName] !== undefined) {
-                        totalCastCount[actorName]++;
-                    }
-                });
-            });
-
-            const myWatchedCount = {};
-            roleCastMap.forEach(r => {
-                r.actors.forEach(actor => {
-                    myWatchedCount[actor] = 0;
+                    if (totalCastCount[actorName] !== undefined) totalCastCount[actorName]++;
                 });
             });
 
@@ -1156,37 +1259,45 @@
                 if (foundCast) {
                     roleCastMap.forEach(r => {
                         const actorName = foundCast[r.key];
-                        if (myWatchedCount[actorName] !== undefined) {
-                            myWatchedCount[actorName]++;
-                        }
+                        if (myWatchedCount[actorName] !== undefined) myWatchedCount[actorName]++;
                     });
                 }
             });
 
             roleCastMap.forEach(r => {
-                const group = document.createElement('div');
-                group.className = 'actor-board-group';
+                const roleGroup = document.createElement('div');
+                roleGroup.className = 'casting-role-group';
 
-                const label = document.createElement('div');
-                label.className = 'actor-board-label';
-                label.innerText = r.role;
-                group.appendChild(label);
+                const roleTitle = document.createElement('div');
+                roleTitle.className = 'casting-role-title';
+                roleTitle.innerText = r.role;
+                roleGroup.appendChild(roleTitle);
 
-                const list = document.createElement('div');
-                list.className = 'actor-board-list';
+                const grid = document.createElement('div');
+                grid.className = 'casting-grid';
 
                 r.actors.forEach(actor => {
                     const watched = myWatchedCount[actor] || 0;
                     const total = totalCastCount[actor] || 0;
+                    const imgUrl = actorImages[actor] || 'https://via.placeholder.com/100';
 
-                    const badge = document.createElement('div');
-                    badge.className = `actor-board-badge ${watched > 0 ? 'watched' : ''}`;
-                    badge.innerHTML = `${actor} (<span class="count-highlight">${watched}</span>/${total})`;
-                    list.appendChild(badge);
+                    const card = document.createElement('div');
+                    card.className = 'actor-card';
+
+                    card.innerHTML = `
+                        <div class="actor-img-wrapper">
+                            <img src="${imgUrl}" alt="${actor}">
+                        </div>
+                        <div class="actor-name">${actor}</div>
+                        <div class="actor-count-badge ${watched > 0 ? 'has-count' : ''}">
+                            Total ${watched}/${total}
+                        </div>
+                    `;
+                    grid.appendChild(card);
                 });
 
-                group.appendChild(list);
-                container.appendChild(group);
+                roleGroup.appendChild(grid);
+                container.appendChild(roleGroup);
             });
         }
 
@@ -1202,15 +1313,10 @@
         function splitSeatRow(nums) {
             const a = [], b = [], c = [];
             nums.forEach(n => {
-                if (typeof n === 'number') {
-                    if (n <= 14) a.push(n);
-                    else if (n <= 30) b.push(n);
-                    else c.push(n);
-                } else {
-                    if (n.refNum <= 14) a.push(n);
-                    else if (n.refNum <= 30) b.push(n);
-                    else c.push(n);
-                }
+                const numVal = (typeof n === 'number') ? n : n.refNum;
+                if (numVal <= 14) a.push(n);
+                else if (numVal <= 30) b.push(n);
+                else c.push(n);
             });
             return { a, b, c };
         }
@@ -1246,23 +1352,14 @@
 
             const data1F = raw1F.map(item => {
                 const split = splitSeatRow(item.range);
-                return {
-                    row: item.row,
-                    a: split.a,
-                    b: split.b,
-                    c: split.c,
-                    isGrouped222: !!item.isGrouped222
-                };
+                return { row: item.row, a: split.a, b: split.b, c: split.c, isGrouped222: !!item.isGrouped222 };
             });
 
             const range12F = [];
             for (let i = 1; i <= 44; i++) {
                 if (i === 30) continue;
-                if (i === 17 || i === 27) {
-                    range12F.push({ isEmpty: true, refNum: i });
-                } else {
-                    range12F.push(i);
-                }
+                if (i === 17 || i === 27) range12F.push({ isEmpty: true, refNum: i });
+                else range12F.push(i);
             }
 
             const raw2F = [
@@ -1282,16 +1379,11 @@
 
             const data2F = raw2F.map(item => {
                 const split = splitSeatRow(item.range);
-                return {
-                    row: item.row,
-                    a: split.a,
-                    b: split.b,
-                    c: split.c
-                };
+                return { row: item.row, a: split.a, b: split.b, c: split.c };
             });
 
-            renderFloorRows(map1F, data1F, '1층', '1F');
-            renderFloorRows(document.getElementById('seatMap2F'), data2F, '2층', '2F');
+            renderFloorRows(map1F, data1F, '1층');
+            renderFloorRows(document.getElementById('seatMap2F'), data2F, '2층');
         }
 
         function getGradeFromImage(floor, row, num) {
@@ -1300,9 +1392,7 @@
                     if (num >= 20 && num <= 25) return { cls: 'c-unassigned', label: '미판매석' };
                     return { cls: 'c-vip', label: 'VIP석' };
                 }
-
                 const rNum = parseInt(row);
-
                 if (row === '1' && ((num >= 12 && num <= 14) || (num >= 31 && num <= 33))) return { cls: 'c-unassigned', label: '미판매석' };
                 if (row === '2' && ((num >= 11 && num <= 12) || (num >= 33 && num <= 34))) return { cls: 'c-unassigned', label: '미판매석' };
                 if (row === '3' && ((num >= 10 && num <= 11) || (num >= 34 && num <= 35))) return { cls: 'c-unassigned', label: '미판매석' };
@@ -1313,11 +1403,7 @@
                 if ((row === '9' || row === '10') && ((num >= 5 && num <= 6) || (num >= 39 && num <= 40))) return { cls: 'c-unassigned', label: '미판매석' };
                 if (row === '11' && ((num >= 4 && num <= 5) || (num >= 40 && num <= 41))) return { cls: 'c-unassigned', label: '미판매석' };
                 if ((row === '12' || row === '13') && ((num >= 3 && num <= 4) || (num >= 41 && num <= 42))) return { cls: 'c-unassigned', label: '미판매석' };
-
-                if (row === '20' && ((num >= 9 && num <= 14) || (num >= 31 && num <= 37))) {
-                    return { cls: 'c-disabled', label: '장애인석' };
-                }
-
+                if (row === '20' && ((num >= 9 && num <= 14) || (num >= 31 && num <= 37))) return { cls: 'c-disabled', label: '장애인석' };
                 if (rNum >= 1 && rNum <= 18) {
                     if (num >= 8 && num <= 37) return { cls: 'c-vip', label: 'VIP석' };
                     return { cls: 'c-r', label: 'R석' };
@@ -1327,82 +1413,24 @@
 
             if (floor === '2층') {
                 const rNum = parseInt(row);
-
-                if (row === '1' && [2, 3, 4, 41, 42, 43].includes(num)) {
-                    return { cls: 'c-unassigned', label: '미판매석' };
-                }
-
+                if (row === '1' && [2, 3, 4, 41, 42, 43].includes(num)) return { cls: 'c-unassigned', label: '미판매석' };
                 if (row === '1') {
                     if ((num >= 5 && num <= 8) || (num >= 37 && num <= 40)) return { cls: 'c-r', label: 'R석' };
                     return { cls: 'c-vip', label: 'VIP석' };
                 }
-
                 if (row === '2') {
                     if ((num >= 2 && num <= 8) || (num >= 37 && num <= 43)) return { cls: 'c-r', label: 'R석' };
                     return { cls: 'c-vip', label: 'VIP석' };
                 }
-
                 if (rNum >= 3 && rNum <= 5) return { cls: 'c-r', label: 'R석' };
                 if (rNum >= 6 && rNum <= 10) return { cls: 'c-s', label: 'S석' };
                 if (rNum >= 11 && rNum <= 12) return { cls: 'c-a', label: 'A석' };
             }
-
             return { cls: 'c-vip', label: 'VIP석' };
         }
 
-        function createFloorLabelRow(floorText) {
-            const rowWrapper = document.createElement('div');
-            rowWrapper.className = 'floor-label-row';
-
-            const dummyNum = document.createElement('div');
-            dummyNum.className = 'row-num';
-            rowWrapper.appendChild(dummyNum);
-
-            const secA = document.createElement('div');
-            secA.className = 'floor-label-space';
-            secA.style.width = '109.2px';
-            rowWrapper.appendChild(secA);
-
-            const aisle1 = document.createElement('div');
-            aisle1.className = 'aisle-space';
-            rowWrapper.appendChild(aisle1);
-
-            const secB = document.createElement('div');
-            secB.className = 'floor-label-space';
-            secB.style.alignItems = 'center';
-
-            const bLeft = document.createElement('div');
-            bLeft.style.width = '62.4px';
-            secB.appendChild(bLeft);
-
-            const labelCell = document.createElement('div');
-            labelCell.className = 'floor-label';
-            labelCell.innerText = floorText;
-            secB.appendChild(labelCell);
-
-            const bRight = document.createElement('div');
-            bRight.style.width = '62.4px';
-            secB.appendChild(bRight);
-
-            rowWrapper.appendChild(secB);
-
-            const aisle2 = document.createElement('div');
-            aisle2.className = 'aisle-space';
-            rowWrapper.appendChild(aisle2);
-
-            const secC = document.createElement('div');
-            secC.className = 'floor-label-space';
-            secC.style.width = '109.2px';
-            rowWrapper.appendChild(secC);
-
-            return rowWrapper;
-        }
-
-        function renderFloorRows(targetElem, floorData, floorTitle, floorLabelText) {
+        function renderFloorRows(targetElem, floorData, floorTitle) {
             targetElem.innerHTML = '';
-
-            targetElem.appendChild(createFloorLabelRow(floorLabelText));
-
             floorData.forEach(rData => {
                 const rowWrapper = document.createElement('div');
                 rowWrapper.className = 'seat-row-wrapper';
@@ -1421,7 +1449,6 @@
 
                     seatArr.forEach((item, sIdx) => {
                         const cell = document.createElement('div');
-                        
                         if (typeof item === 'object' && item.isEmpty) {
                             cell.className = 'seat-cell empty-space';
                             secBlock.appendChild(cell);
@@ -1439,14 +1466,11 @@
                         else if (watchCount >= 3) watchClass = 'c-watch-3';
 
                         cell.className = `seat-cell ${watchClass || gInfo.cls}`;
-                        if (rData.isGrouped222 && (sIdx === 1 || sIdx === 3)) {
-                            cell.classList.add('gap-222');
-                        }
+                        if (rData.isGrouped222 && (sIdx === 1 || sIdx === 3)) cell.classList.add('gap-222');
                         cell.innerText = num;
 
                         cell.onclick = () => {
                             document.getElementById('selectSeat').value = `${seatKey} (${gInfo.label})`;
-                            
                             const selectGrade = document.getElementById('seatGrade');
                             if (gInfo.label === 'VIP석') selectGrade.value = '190000';
                             else if (gInfo.label === 'R석') selectGrade.value = '160000';
@@ -1454,20 +1478,77 @@
                             else if (gInfo.label === 'A석') selectGrade.value = '90000';
                             updatePrice();
                         };
-
                         secBlock.appendChild(cell);
                     });
 
                     rowWrapper.appendChild(secBlock);
-
                     if (idx < 2) {
                         const aisle = document.createElement('div');
                         aisle.className = 'aisle-space';
                         rowWrapper.appendChild(aisle);
                     }
                 });
-
                 targetElem.appendChild(rowWrapper);
+            });
+        }
+
+        // 1. [좌석배치도 이미지 저장 - 정중앙 축소 캡처 방식 적용]
+        function downloadSeatMapImage() {
+            const captureArea = document.getElementById('pureSeatCaptureArea');
+            const seatWrapper = document.getElementById('seatZoomWrapper');
+            if (!captureArea || !seatWrapper) return;
+
+            const prevZoom = currentZoomLevel;
+            resetZoom();
+            
+            // 기존 스타일 보관
+            const origTransform = seatWrapper.style.transform;
+            const origOrigin = seatWrapper.style.transformOrigin;
+
+            // 캡처 시 정중앙 축소 처리 (잘림 완전 방지)
+            seatWrapper.style.transformOrigin = 'top center';
+            seatWrapper.style.transform = 'scale(0.78)'; 
+
+            html2canvas(captureArea, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff"
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'FROZEN_좌석배치도_기록.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // 원상복구
+                seatWrapper.style.transform = origTransform;
+                seatWrapper.style.transformOrigin = origOrigin;
+                currentZoomLevel = prevZoom;
+                applyZoom();
+            }).catch(err => {
+                console.error("좌석배치도 저장 중 오류 발생:", err);
+                seatWrapper.style.transform = origTransform;
+                seatWrapper.style.transformOrigin = origOrigin;
+                alert("좌석배치도 이미지 저장 중 오류가 발생했습니다.");
+            });
+        }
+
+        // 2. [배우별 정산판 전용 이미지 저장]
+        function downloadActorBoardImage() {
+            const captureArea = document.getElementById('pureActorBoardCaptureArea');
+            if (!captureArea) return;
+
+            html2canvas(captureArea, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff"
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'FROZEN_배우별정산판.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(err => {
+                console.error("배우별 정산판 저장 중 오류 발생:", err);
+                alert("배우별 정산판 이미지 저장 중 오류가 발생했습니다.");
             });
         }
     </script>
